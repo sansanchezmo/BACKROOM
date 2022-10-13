@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Nabla&family=Roboto:wght@300&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('../assets/images/background-image.jpeg');
+    background-size: cover;
+    max-width: 100%;
+}
+
+.main-content {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.title-1 {
+    font-family: 'Nabla', cursive;
+    font-size: 80px;
+    color: aliceblue;
+}
+
+.play-button {
+    font-family: 'Nabla', sans-serif;
+    filter: grayscale(100%);
+    color: blue;
+    opacity: 30%;
+    font-size: 40px;
+    text-decoration: none;
+}
+
+.play-button:hover {
+    opacity: 100%;
+    filter: grayscale(0%);
+
+}

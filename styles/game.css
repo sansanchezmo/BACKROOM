@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Nabla&family=Roboto:wght@300&display=swap');
+
+body {
+    background-color: black;
+}
+
+.main-content {
+    display: flex;
+    justify-content: center;
+}
+
+.title-1 {
+    font-family: 'Nabla', cursive;
+
+}
