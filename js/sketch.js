@@ -27,6 +27,15 @@ var $ = function(prop){
         r:0,
       r2:0,
     }
+    let roof;
+    let walls;
+    let floor;
+
+    function preload() {
+      roof = loadImage('assets/images/techo.png');
+      walls = loadImage('assets/images/walls.png');
+      floor = loadImage('assets/images/floor.png');
+    }
 
     function setup(){
         createCanvas(window.innerWidth,window.innerHeight,WEBGL);
@@ -49,13 +58,14 @@ var $ = function(prop){
           push();
           translate(i*500,1,j*500);
           rotateY(ang(90));
-          fill(228,225,70);
-
+          //fill(228,225,70);
+          texture(walls);
           box(30,120,30);
           pop();
           }
         }
-        //pared
+
+        //Pared
         pared(250,0,-500,0,90,0,1500);
         pared(-250,0,-250,0,90,0,1000);
         pared(0,0,250,0,0,0,500);
@@ -65,43 +75,53 @@ var $ = function(prop){
         pared(-1250,0,-1200,0,90,0,200);
         //pared(PARED);
 
-        //suelo
-        push();
-        translate(0,50,0);
-        rotateX(ang(90));
-        fill(167, 164, 61);
-        plane(10000);
-        pop();
+        //Suelo
+        for(var k = -20; k < 20; k++){
+          for(var l = -20; l < 20; l++){
+            push();
+            translate(k*100,50,l*100);
+            rotateX(ang(90));
+            fill(100);
+            texture(floor);
+            plane(100);
+            pop();
+          }
+        }
+
+        //Piso del piso
         push();
         translate(0,100,0);
         rotateX(ang(90));
-        fill(167, 164, 61);
+        //fill(167, 164, 61);
+        texture(floor);
         plane(10000);
         pop();
-        //techo
-        /*
-        push();
-        translate(0,-55,0);
-        rotateX(ang(90));
-        fill(150, 145, 49);
-        plane(10000);
-        pop();*/
-        /*
-        
-        */
-        push();
-        translate(0,-100,0);
-        rotateX(ang(90));
-        fill(150, 145, 49);
-        plane(10000);
-        pop();
+
+        //Techo
+        for(var k = -5; k < 5; k++){
+          for(var l = -5; l < 5; l++){
+            push();
+            translate(k*500,-90,l*500);
+            rotateX(ang(90));
+            fill(100);
+            texture(roof);
+            plane(500);
+            pop();
+          }
+        }
+
         //Luces
-        push();
-        translate(0,-40,0);
-        rotateX(ang(90));
-        fill(255);
-        plane(10);
-        pop();
+        for(var k = -8; k < 8; k++){
+          for(var l = -10; l < 10; l++){
+            push();
+            translate(k*250,-89,l*250);
+            rotateX(ang(90));
+            fill(255);
+            box(80, 80, 10);
+            //plane(80);
+            pop();
+          }
+        }
 
         D.cx=mx*sensitivityX;
         D.cy=my*sensitivityY;
@@ -206,13 +226,12 @@ var $ = function(prop){
         rotateX(ang(dx));
         rotateY(ang(dy));
         rotateZ(ang(dz));
-        fill(228,225,70);
+        texture(walls);
+        //fill(228,225,70);
         plane(l,110);
         pop();
         
         
         /*Arreglar colision aca denrto UwU con un if y and tal vez o if anidado*/
         
-      
-              
   }
