@@ -42,3 +42,9 @@ body {
     filter: grayscale(0%);
 
 }
+
+.suspense-music {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
