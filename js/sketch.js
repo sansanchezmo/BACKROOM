@@ -40,6 +40,8 @@ var $ = function(prop){
     function setup(){
         createCanvas(window.innerWidth,window.innerHeight,WEBGL);
         cam = createCamera();
+        // Carga de efectos de sonido
+        stepsSound = loadSound('assets/audio/step.mp3');
 
     
     } 
@@ -127,26 +129,46 @@ var $ = function(prop){
         D.cy=my*sensitivityY;
         //Moviviento adelante
         if(keys[87] && keyIsDown(16)){
+          if (!stepsSound.isPlaying()) {
+            stepsSound.play();
+            stepsSound.rate(5, 500);
+          }
           playerSpeed=5;
           D.z-=cos(ang(D.r))*playerSpeed;
           D.x-=sin(ang(D.r))*playerSpeed;
         }
         if(keys[87]){
+            if (!stepsSound.isPlaying()) {
+              stepsSound.play();
+              stepsSound.rate(2);
+            }
             D.z-=cos(ang(D.r))*playerSpeed;
             D.x-=sin(ang(D.r))*playerSpeed;  
         }
        //Moviviento atras
         if(keys[83]){
+            if (!stepsSound.isPlaying()) {
+              stepsSound.play();
+              stepsSound.rate(2);
+            }
             D.z+=cos(ang(D.r))*(playerSpeed-0.7);
             D.x+=sin(ang(D.r))*(playerSpeed-0.7);  
         }
       //Moviviento izq
         if(keys[65]){
+            if (!stepsSound.isPlaying()) {
+              stepsSound.play();
+              stepsSound.rate(2);
+            }
             D.z-=cos(ang(D.r+90))*playerSpeed;
             D.x-=sin(ang(D.r+90))*playerSpeed;  
         }
         //Moviviento derecha
         if(keys[68]){
+            if (!stepsSound.isPlaying()) {
+              stepsSound.play();
+              stepsSound.rate(2);
+            }
             D.z+=cos(ang(D.r+90))*playerSpeed;
             D.x+=sin(ang(D.r+90))*playerSpeed;  
         }
