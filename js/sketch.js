@@ -35,6 +35,8 @@ var $ = function(prop){
     function preload() {
       roof = loadImage('assets/images/techo.png');
       walls = loadImage('assets/images/walls.png');
+      smile = loadImage('assets/images/smile.jpg');
+      black = loadImage('assets/images/black.jpg');
       floor = loadImage('assets/images/floor.png');
     }
 
@@ -74,19 +76,29 @@ var $ = function(prop){
           rotateY(ang(90));
           //fill(228,225,70);
           texture(walls);
-          box(30,120,30);
+          box(30,179,30);
           pop();
           }
         }
 
         //Pared
-        pared(250,0,-500,0,90,0,1500);
-        pared(-250,0,-250,0,90,0,1000);
-        pared(0,0,250,0,0,0,500);
-        pared(-750,0,-750,0,0,0,1000);
-        pared(-500,0,-1250,0,0,0,1500);
-        pared(-1250,0,-800,0,90,0,200);
-        pared(-1250,0,-1200,0,90,0,200);
+        pared(250,0,-500,0,90,0,1500,walls);
+        pared(-250,0,-250,0,90,0,1000,walls);
+        pared(0,0,250,0,0,0,500,walls);
+        pared(-750,0,-750,0,0,0,1000,walls);
+        pared(-500,0,-1250,0,0,0,1500,walls);
+        pared(-1250,0,-800,0,90,0,200,walls);
+        pared(-1250,0,-1200,0,90,0,200,walls);
+
+        //Smile
+        pared(-1800,0,-1000,0,90,0,200,smile);
+
+        //Pasillo
+        pared(-1500,0,-900,0,0,0,500,walls);
+        pared(-1500,0,-1100,0,0,0,500,walls);
+
+        //Pared de afuera
+        pared(-1800,0,-1200,0,90,0,5000,black);
         //pared(PARED);
 
         //Suelo
@@ -101,15 +113,6 @@ var $ = function(prop){
             pop();
           }
         }
-
-        //Piso del piso
-        push();
-        translate(0,100,0);
-        rotateX(ang(90));
-        //fill(167, 164, 61);
-        texture(floor);
-        plane(10000);
-        pop();
 
         //Techo
         for(var k = -5; k < 5; k++){
@@ -128,7 +131,7 @@ var $ = function(prop){
         for(var k = -8; k < 8; k++){
           for(var l = -10; l < 10; l++){
             push();
-            translate(k*250,-89,l*250);
+            translate(k*190,-89,l*220);
             rotateX(ang(90));
             fill(255);
             box(80, 80, 10);
@@ -269,16 +272,16 @@ var $ = function(prop){
             canvas.requestPointerLock();
         }
     }
-  function pared(x,y,z,dx,dy,dz,l){
+  function pared(x,y,z,dx,dy,dz,l, text){
         // console.log('inside pared function');
         push();
         translate(x,y,z);
         rotateX(ang(dx));
         rotateY(ang(dy));
         rotateZ(ang(dz));
-        texture(walls);
+        texture(text);
         //fill(228,225,70);
-        plane(l,110);
+        plane(l,179);
         pop();
         
         

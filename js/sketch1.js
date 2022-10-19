@@ -48,6 +48,7 @@ var $ = function(prop){
     function setup(){
         createCanvas(window.innerWidth,window.innerHeight,WEBGL);
         cam = createCamera();
+        perspective(PI / 3.0, width / innerHeight, 0.1, 5000);
         // Carga de efectos de sonido
         stepsSound = loadSound('assets/audio/step.mp3');
         portalSound = loadSound('assets/audio/portal.mp3');
@@ -78,7 +79,7 @@ var $ = function(prop){
           rotateY(ang(90));
           //fill(228,225,70);
           texture(walls);
-          box(30,120,30);
+          box(30,179,30);
           pop();
           }
         }
@@ -91,6 +92,9 @@ var $ = function(prop){
         pared(-500,0,-1250,0,0,0,1500);
         pared(-1250,0,-800,0,90,0,200);
         pared(-1250,0,-1200,0,90,0,200);
+
+        //Pared de afuera
+        pared(-1800,0,-1200,0,90,0,5000);
         //pared(PARED);
 
         //Suelo
@@ -105,15 +109,6 @@ var $ = function(prop){
             pop();
           }
         }
-
-        //Piso del piso
-        push();
-        translate(0,100,0);
-        rotateX(ang(90));
-        //fill(167, 164, 61);
-        texture(floor);
-        plane(10000);
-        pop();
 
         //Techo
         for(var k = -5; k < 5; k++){
@@ -132,7 +127,7 @@ var $ = function(prop){
         for(var k = -8; k < 8; k++){
           for(var l = -10; l < 10; l++){
             push();
-            translate(k*250,-89,l*250);
+            translate(k*190,-89,l*220);
             rotateX(ang(90));
             fill(255);
             box(80, 80, 10);
@@ -281,7 +276,7 @@ var $ = function(prop){
         rotateZ(ang(dz));
         texture(walls);
         //fill(228,225,70);
-        plane(l,110);
+        plane(l,179);
         pop();
         
         
