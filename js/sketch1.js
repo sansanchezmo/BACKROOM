@@ -35,6 +35,8 @@ var $ = function(prop){
     function preload() {
       roof = loadImage('assets/images/techo.png');
       walls = loadImage('assets/images/walls.png');
+      smile = loadImage('assets/images/smile.jpg');
+      black = loadImage('assets/images/black.jpg');
       floor = loadImage('assets/images/floor.png');
     }
 
@@ -94,8 +96,15 @@ var $ = function(prop){
         pared(-1250,0,-800,0,90,0,200);
         pared(-1250,0,-1200,0,90,0,200);
 
+        //Smile
+        pared(-1800,0,-1000,0,90,0,200,smile);
+
+        //Pasillo
+        pared(-1500,0,-900,0,0,0,500,walls);
+        pared(-1500,0,-1100,0,0,0,500,walls);
+
         //Pared de afuera
-        pared(-1800,0,-1200,0,90,0,5000);
+        pared(-1800,0,-1200,0,90,0,5000,black);
         //pared(PARED);
 
         //Suelo
