@@ -42,6 +42,8 @@ var $ = function(prop){
         cam = createCamera();
         // Carga de efectos de sonido
         stepsSound = loadSound('assets/audio/step.mp3');
+        portalSound = loadSound('assets/audio/portal.mp3');
+        sprintSound = loadSound('assets/audio/sprint.mp3');
 
     
     } 
@@ -127,18 +129,22 @@ var $ = function(prop){
 
         D.cx=mx*sensitivityX;
         D.cy=my*sensitivityY;
-        //Moviviento adelante
+        
+        // Sprint
         if(keys[87] && keyIsDown(16)){
-          if (!stepsSound.isPlaying()) {
-            stepsSound.play();
-            stepsSound.rate(5, 500);
+          if (!sprintSound.isPlaying()) {
+            sprintSound.play();
+            sprintSound.amp(0.2);
+            sprintSound.rate(5);
           }
           playerSpeed=5;
           D.z-=cos(ang(D.r))*playerSpeed;
           D.x-=sin(ang(D.r))*playerSpeed;
         }
+
+        //Moviviento adelante
         if(keys[87]){
-            if (!stepsSound.isPlaying()) {
+            if (!stepsSound.isPlaying() && !sprintSound.isPlaying()) {
               stepsSound.play();
               stepsSound.rate(2);
             }
@@ -147,7 +153,7 @@ var $ = function(prop){
         }
        //Moviviento atras
         if(keys[83]){
-            if (!stepsSound.isPlaying()) {
+            if (!stepsSound.isPlaying() && !sprintSound.isPlaying()) {
               stepsSound.play();
               stepsSound.rate(2);
             }
@@ -156,7 +162,7 @@ var $ = function(prop){
         }
       //Moviviento izq
         if(keys[65]){
-            if (!stepsSound.isPlaying()) {
+            if (!stepsSound.isPlaying() && !sprintSound.isPlaying()) {
               stepsSound.play();
               stepsSound.rate(2);
             }
@@ -165,10 +171,10 @@ var $ = function(prop){
         }
         //Moviviento derecha
         if(keys[68]){
-            if (!stepsSound.isPlaying()) {
-              stepsSound.play();
-              stepsSound.rate(2);
-            }
+          if (!stepsSound.isPlaying() && !sprintSound.isPlaying()) {
+            stepsSound.play();
+            stepsSound.rate(2);
+          }
             D.z+=cos(ang(D.r+90))*playerSpeed;
             D.x+=sin(ang(D.r+90))*playerSpeed;  
         }
@@ -209,21 +215,31 @@ var $ = function(prop){
       }
       //colision alpha (para mejorar usar if en una funcion colidion con los datos de cada pared)
       if(D.z>=230){
+        console.log('collision: 00');
         D.z=229
       }
       if(D.x>=230){
+        console.log('collision: 01');
         D.x=229
       }
       if(D.z<=-1230){
+        console.log('collision: 02');
         D.z= -1229
       }
       if(D.x<=-230 && D.x>=-260 && D.z>=-730 ){
+        console.log('collision: 03');
         D.x=-229
       }
       if(D.x<-250 && D.z>=-770 ){
+        console.log('collision: 04');
         D.z=-769;
       }
       if(D.x<-1230 ){
+        console.log('collision: 05');
+        if (!portalSound.isPlaying()) {
+          portalSound.play();
+          portalSound.rate(1.5);
+        }
         D.x=0;
         D.z=100;
       
@@ -243,6 +259,7 @@ var $ = function(prop){
         }
     }
   function pared(x,y,z,dx,dy,dz,l){
+        // console.log('inside pared function');
         push();
         translate(x,y,z);
         rotateX(ang(dx));
