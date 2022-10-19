@@ -11,6 +11,7 @@ var $ = function(prop){
     var keys = [];
     var col = [];
     var cam;
+    var zoom = 3.0;
     var yAng = 0;
     var floorTexture, wallTexture;
     document.body.addEventListener("mousemove",function(e){
@@ -37,9 +38,17 @@ var $ = function(prop){
       floor = loadImage('assets/images/floor.png');
     }
 
+    function mouseWheel(event) {
+      print(event.delta);
+      if (zoom > 1.5 || Math.sign(event.delta) == -1) {
+        zoom -= event.delta / 1000;
+      }
+    }
+
     function setup(){
         createCanvas(window.innerWidth,window.innerHeight,WEBGL);
         cam = createCamera();
+        // perspective(PI / 3.0, width / height, 0.1, 5000);
         // Carga de efectos de sonido
         stepsSound = loadSound('assets/audio/step.mp3');
         portalSound = loadSound('assets/audio/portal.mp3');
@@ -50,6 +59,7 @@ var $ = function(prop){
     function draw(){
         background(0);
         noStroke();
+        perspective(PI / zoom, width / height, 0.1, 5000);
         cam.pan(ang(-D.cx));
         cam.tilt(ang(D.cy));
         D.r-=(mx*sensitivityX);
@@ -242,6 +252,7 @@ var $ = function(prop){
         }
         D.x=0;
         D.z=100;
+        // location.href = './play1.html';
       
       }
       

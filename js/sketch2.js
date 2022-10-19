@@ -11,6 +11,7 @@ var $ = function(prop){
     var keys = [];
     var col = [];
     var cam;
+    var zoom = 3.0;
     var yAng = 0;
     var floorTexture, wallTexture;
     document.body.addEventListener("mousemove",function(e){
@@ -37,6 +38,14 @@ var $ = function(prop){
       floor = loadImage('assets/images/floor.png');
     }
 
+    function mouseWheel(event) {
+      print(event.delta);
+      print('FOV: ' + PI/zoom);
+      if (zoom > 1.5 || Math.sign(event.delta) == -1) {
+        zoom -= event.delta / 1000;
+      }
+    }
+
     function setup(){
         createCanvas(window.innerWidth,window.innerHeight,WEBGL);
         cam = createCamera();
@@ -46,10 +55,12 @@ var $ = function(prop){
         sprintSound = loadSound('assets/audio/sprint.mp3');
 
     
-    } 
+    }
+
     function draw(){
         background(238, 226, 120);
         noStroke();
+        perspective(PI / zoom, width / height, 0.1, 5000);
         cam.pan(ang(-D.cx));
         cam.tilt(ang(D.cy));
         D.r-=(mx*sensitivityX);

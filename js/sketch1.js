@@ -11,6 +11,7 @@ var $ = function(prop){
     var keys = [];
     var col = [];
     var cam;
+    var zoom = 3.0;
     var yAng = 0;
     var floorTexture, wallTexture;
     document.body.addEventListener("mousemove",function(e){
@@ -37,6 +38,13 @@ var $ = function(prop){
       floor = loadImage('assets/images/floor.png');
     }
 
+    function mouseWheel(event) {
+      print(event.delta);
+      if (zoom > 1.5 || Math.sign(event.delta) == -1) {
+        zoom -= event.delta / 1000;
+      }
+    }
+
     function setup(){
         createCanvas(window.innerWidth,window.innerHeight,WEBGL);
         cam = createCamera();
@@ -49,7 +57,8 @@ var $ = function(prop){
     } 
     function draw(){
         background(0);
-
+        noStroke();
+        perspective(PI / zoom, width / height, 0.1, 5000);
         let dx = mouseX - width / 2;
         let dy = mouseY - height / 2;
         directionalLight(255, 255, 0, dx, dy, 255);
