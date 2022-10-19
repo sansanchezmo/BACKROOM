@@ -62,7 +62,8 @@ var $ = function(prop){
         perspective(PI / zoom, width / height, 0.1, 5000);
         let dx = mouseX - width / 2;
         let dy = mouseY - height / 2;
-        directionalLight(255, 255, 0, dx, dy, 255);
+        directionalLight(255, 255, 255, dx, dy, -255);
+        // directionalLight(255, 255, 255, width / 2, height / 2, 255);
         
         noStroke();
         cam.pan(ang(-D.cx));
