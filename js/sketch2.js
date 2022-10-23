@@ -61,21 +61,29 @@ var $ = function(prop){
         background(238, 226, 120);
         noStroke();
         perspective(PI / zoom, width / height, 0.1, 5000);
+        let dx = mouseX - width / 2;
+        let dy = mouseY - height / 2;
+        
+        
+        //ambientLight(102, 102, 102);
+
         cam.pan(ang(-D.cx));
         cam.tilt(ang(D.cy));
         D.r-=(mx*sensitivityX);
         yAng-=(my*sensitivityY);
         
         cam.setPosition(D.x,-D.y,D.z);
-
+        
         for(var i = -2.5; i < 2.5; i++){
           for(var j = -2.5; j < 2.5; j++){
+          
           push();
           translate(i*500,1,j*500);
           rotateY(ang(90));
           //fill(228,225,70);
           texture(walls);
           box(30,120,30);
+          
           pop();
           }
         }
@@ -95,6 +103,8 @@ var $ = function(prop){
           for(var l = -20; l < 20; l++){
             push();
             translate(k*100,50,l*100);
+            //ambientLight(50);
+            //pointLight(255, 255, 255, D.cx- width / 2, -D.cy - height / 2, 250);
             rotateX(ang(90));
             fill(100);
             texture(floor);
@@ -102,15 +112,6 @@ var $ = function(prop){
             pop();
           }
         }
-
-        //Piso del piso
-        push();
-        translate(0,100,0);
-        rotateX(ang(90));
-        //fill(167, 164, 61);
-        texture(floor);
-        plane(10000);
-        pop();
 
         //Techo
         for(var k = -5; k < 5; k++){
@@ -129,11 +130,17 @@ var $ = function(prop){
         for(var k = -8; k < 8; k++){
           for(var l = -10; l < 10; l++){
             push();
-            translate(k*250,-89,l*250);
+            translate(k*190,-89,l*220);
+            
             rotateX(ang(90));
             fill(255);
             box(80, 80, 10);
-            //plane(80);
+
+            //Luces 2 xd
+            rotateX(ang(90));
+            fill(255, 255, 255, 20);
+            tint(255, 126);
+            cone(80, 280);
             pop();
           }
         }
@@ -277,7 +284,7 @@ var $ = function(prop){
         rotateZ(ang(dz));
         texture(walls);
         //fill(228,225,70);
-        plane(l,110);
+        plane(l,179);
         pop();
         
         
