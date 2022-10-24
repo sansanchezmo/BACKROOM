@@ -137,12 +137,6 @@ var $ = function(prop){
             rotateX(ang(90));
             fill(255);
             box(80, 80, 10);
-
-            //Luces 2 xd
-            rotateX(ang(90));
-            fill(255, 255, 255, 20);
-            tint(255, 126);
-            cone(80, 280);
             pop();
           }
         }
