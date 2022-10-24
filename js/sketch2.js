@@ -60,7 +60,9 @@ var $ = function(prop){
     function draw(){
         background(238, 226, 120);
         noStroke();
+        pointLight(255, 255, 255, 0, -80, -880);
         perspective(PI / zoom, width / height, 0.1, 5000);
+      
         let dx = mouseX - width / 2;
         let dy = mouseY - height / 2;
         
