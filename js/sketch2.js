@@ -13,6 +13,7 @@ var $ = function(prop){
     var cam;
     var zoom = 3.0;
     var yAng = 0;
+    var light = [255, 255, 255];
     var floorTexture, wallTexture;
     document.body.addEventListener("mousemove",function(e){
         mx = e.movementX;
@@ -60,7 +61,7 @@ var $ = function(prop){
     function draw(){
         background(238, 226, 120);
         noStroke();
-        pointLight(255, 255, 255, 0, -80, -880);
+        pointLight(light, 0, -80, -880);
         perspective(PI / zoom, width / height, 0.1, 5000);
       
         let dx = mouseX - width / 2;
@@ -84,7 +85,7 @@ var $ = function(prop){
           rotateY(ang(90));
           //fill(228,225,70);
           texture(walls);
-          box(30,120,30);
+          box(30,179,30);
           
           pop();
           }
@@ -256,6 +257,7 @@ var $ = function(prop){
         }
         D.x=0;
         D.z=100;
+        light = [255,int(random(255)), int(random(255))];
       
       }
       
