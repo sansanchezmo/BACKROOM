@@ -141,6 +141,7 @@ var $ = function(prop){
             rotateX(ang(90));
             fill(255);
             box(80, 80, 10);
+            pop();
           }
         }
 
